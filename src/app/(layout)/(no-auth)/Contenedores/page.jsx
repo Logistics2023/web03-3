@@ -19,7 +19,8 @@ function Componente({ route, db, id, title, image, paragraph }) {
   const router = useRouter()
   return <div className='relative w-full min-h-full md:w-auto bg-[#ffffffcb] my-5 flex  lg:max-w-[500px] lg:min-w-[250px]  lg:text-[18px] lg:mx-5 flex flex-col justify-between lg:items-center rounded-[15px] '>
   <img src={image} className="relative  min-h-[40%] w-auto object-contain p-5" alt="" />
-  <div className="relative w-full bg-gradient-to-t md:min-h-[45%] from-[#00195cbe] via-[#00195cbe] to-[#00195c] space-y-5 p-5 py-5 rounded-r-[15px] rounded-t-[0]  rounded-b-[15px]">
+  <div className="relative w-full bg-gradient-to-t md:min-h-[45%] from-[#00195cbe] via-[#00195cbe] to-[#00195c] space-y-5 p-5 py-5 rounded-r-[15px]   
+    rounded-t-[0]  rounded-b-[15px]">
     <h4 className="w-full text-left font-medium border-b-[3px] text-white pb-5 pl-0 ml-0 border-[#ffffff] p-5">{title}</h4>
     <p className="relative text-white " dangerouslySetInnerHTML={{ __html: paragraph }} >
     </p>
