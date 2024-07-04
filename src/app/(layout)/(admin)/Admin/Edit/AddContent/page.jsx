@@ -45,12 +45,12 @@ export default function Home() {
     function onChangeHandler(e) {
         setData({ ...data, [e.target.name]: e.target.value })
     }
- 
+
     function handlerLess2(d) {
-            let db = { ...data2 };
-            delete db[`item${data2 !== undefined && Object.keys(data2).length - 1}`];
-            removeData(`/Cliente/${query}/tarjetas/${route}/especificaciones/item${Object.keys(data2).length - 1}`, setUserSuccess,  ()=>setData2(db) )
-            return  
+        let db = { ...data2 };
+        delete db[`item${data2 !== undefined && Object.keys(data2).length - 1}`];
+        removeData(`/Cliente/${query}/tarjetas/${route}/especificaciones/item${Object.keys(data2).length - 1}`, setUserSuccess, () => setData2(db))
+        return
     }
     function onChangeHandler2(e, index) {
         setData2({ ...data2, [`item${index}`]: { ...data2[`item${index}`], [e.target.name]: e.target.value } })
@@ -94,6 +94,7 @@ export default function Home() {
             setData2({ ...cliente[query].tarjetas[route].especificaciones, ...data2, })
         }
     }, [cliente, query, route])
+    console.log(data2)
     return (
 
         <div className="min-h-full">
@@ -110,14 +111,27 @@ export default function Home() {
                         <div className="col-span-full">
                             <h2 className="text-base font-bold leading-7 text-gray-900  text-center p-5 ">ADMINISTRAR CONTENIDO DE TARJETA</h2>
                             <div className='flex justify-center p-5'>
-                                <Suspense >
-                                    <video src={data && data.urlVideo && data.urlVideo ? data.urlVideo : (cliente && cliente[query] && cliente[query].tarjetas && cliente[query].tarjetas[route] && cliente[query].tarjetas[route].urlVideo)} className='h-[300px]' autoPlay loop muted playsInline ></video>
-                                </Suspense >
+                                {/* {data && data.urlVideo && data.urlVideo
+                                    ? <video src={data && data.urlVideo && data.urlVideo ? data.urlVideo : (cliente && cliente[query] && cliente[query].tarjetas && cliente[query].tarjetas[route] && cliente[query].tarjetas[route].urlVideo)} className='h-[300px]' autoPlay loop muted playsInline ></video>
+                                    : <img src={data && data.urlIMG && data.urlIMG ? data.urlIMG : '/404.png'} alt="" />
+                                } */}
+
+
+
+                                {(data && data.urlVideo && data.urlVideo) || (cliente && cliente[query] && cliente[query].tarjetas && cliente[query].tarjetas[route] && cliente[query].tarjetas[route].urlVideo != 'null')
+                                    ? <video src={data && data.urlVideo && data.urlVideo ? data.urlVideo : (cliente && cliente[query] && cliente[query].tarjetas && cliente[query].tarjetas[route] && cliente[query].tarjetas[route].urlVideo != 'null' ? cliente[query].tarjetas[route].urlVideo : '/404.png')} className='h-[300px]' autoPlay loop muted playsInline ></video>
+                                    : <img src={data && data.urlIMG && data.urlIMG ? data.urlIMG : (cliente && cliente[query] && cliente[query].tarjetas && cliente[query].tarjetas[route] && cliente[query].tarjetas[route].urlIMG != 'null' ? cliente[query].tarjetas[route].urlIMG : '/404.png')} alt="" />
+                                }
+
                             </div>
                         </div>
                         <div className="sm:col-span-3">
                             <label htmlFor="last-name" className="block text-[12px] font-medium leading-6 text-gray-900">Subir Video por URL</label>
                             <input type="text" name="urlVideo" onChange={onChangeHandler} className="block w-full rounded-md border-0 p-1.5 mt-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-[12px] sm:leading-6" defaultValue={cliente && cliente[query] && cliente[query].tarjetas[route].urlVideo} />
+                        </div>
+                        <div className="sm:col-span-3">
+                            <label htmlFor="last-name" className="block text-[12px] font-medium leading-6 text-gray-900">Subir Video por URL</label>
+                            <input type="text" name="urlIMG" onChange={onChangeHandler} className="block w-full rounded-md border-0 p-1.5 mt-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-[12px] sm:leading-6" defaultValue={cliente && cliente[query] && cliente[query].tarjetas[route].urlIMG} />
                         </div>
                         <div className="sm:col-span-3">
                             <label htmlFor="last-name" className="block text-[12px] font-medium leading-6 text-gray-900">Titulo</label>

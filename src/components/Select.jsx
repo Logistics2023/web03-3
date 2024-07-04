@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
-import style from './Select.module.css'
-
+import { Translator, getTranslation } from '@miracleufo/react-g-translator';
+import { useUser } from '@/context/Context'
 
 export default function Select({arr, name, click, defaultValue, uuid}) {
+    const {  languaje} = useUser()
 
     const router = useRouter()
 
@@ -24,6 +25,7 @@ export default function Select({arr, name, click, defaultValue, uuid}) {
 console.log(defaultValue)
 
     return (
+        <Translator from='es' to={languaje.slice(0, 2).toLowerCase()}>
 
         <div 
              className={`flex relative bg-gray-50 border border-gray-300 text-gray-900 text-[14px] rounded-xl focus:ring-blue-500 focus:border-blue-500  w-full px-5 p-3`} 
@@ -44,6 +46,8 @@ console.log(defaultValue)
                 }
             </ul>
         </div>
+        </Translator>
+
     )
 }
 

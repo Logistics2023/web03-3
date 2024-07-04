@@ -38,7 +38,7 @@ function Pages() {
 
     return cliente && cliente[query] && cliente[query].tarjetas && cliente[query].tarjetas[route] &&
         <div className="relative flex justify-center min-h-screen pt-[70px]">
-                <img src="/airplane-bg.jpg" className='fixed top-0 w-screen h-screen  object-cover ' alt="" />
+            <img src="/airplane-bg.jpg" className='fixed top-0 w-screen h-screen  object-cover ' alt="" />
 
             <div className="relative  py-[100px] w-[95vw] md:max-w-[960px] bg-white p-[20px]  shadow-[0 4px 8px rgba(0,0,0,0.1)]">
                 {/* <h1 className='font-bold text-[20px]'>Gama Completa de Contenedores - Logistics Gear</h1> */}
@@ -46,9 +46,15 @@ function Pages() {
                 <h2 className='font-bold text-[18px] text-[#333] text-center'>{cliente[query].tarjetas[route]['subtitle 1']}</h2>
                 <br />
                 <div className='flex justify-center'>
-                    <video className='' autoPlay loop muted playsInline controls>
+                    {/* <video className='' autoPlay loop muted playsInline controls>
                         <source src={cliente[query].tarjetas[route].urlVideo} type="video/mp4" />
-                    </video>
+                    </video> */}
+
+
+                    {(cliente && cliente[query] && cliente[query].tarjetas && cliente[query].tarjetas[route] && cliente[query].tarjetas[route].urlVideo != 'null')
+                        ? <video src={cliente[query].tarjetas[route].urlVideo} className='h-[300px]' autoPlay loop muted playsInline ></video>
+                        : <img src={cliente && cliente[query] && cliente[query].tarjetas && cliente[query].tarjetas[route] && cliente[query].tarjetas[route].urlIMG != 'null' ? cliente[query].tarjetas[route].urlIMG : '/404.png'} className='block max-h-[300px]' alt="" />
+                    }
                 </div>
 
                 <table className='w-full mt-[20px] border-collapse	table-fixed'>
